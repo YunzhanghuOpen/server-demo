@@ -77,7 +77,7 @@ class UserController
             return Response::error(FaultCode::PARAMS_ERROR, $errors);
         }
 
-        // gulp
+        // grab
         $user = User::where('mobile', $input['mobile'])->first();
         if (is_null($user)) {
             return Response::error(FaultCode::USER_NOT_EXIST);

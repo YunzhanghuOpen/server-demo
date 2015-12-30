@@ -12,14 +12,13 @@
 */
 
 $app->get('/', function () use ($app) {
-    return $app->welcome();
+    return response('welcome');
 });
 
 /**
  * 注册/登录
  */
 $app->post('/user/register', 'UserController@register');
-
 $app->post('/user/login', 'UserController@login');
 
 
@@ -30,19 +29,15 @@ $app->post('/user/login', 'UserController@login');
 
 // HTML5 方式
 
-$app->get('/yzh/h5/main', 'YzhController@h5Main');
-
-$app->get('/yzh/h5/component/auth', 'YzhController@componentAuth');
-
-$app->get('/yzh/h5/component/card', 'YzhController@componentCard');
-
-$app->get('/yzh/h5/component/invest', 'YzhController@componentInvest');
+$app->get('/yzh/{uid}/h5/main', 'YzhController@h5Main');
+$app->get('/yzh/{uid}/h5/component/auth', 'YzhController@componentAuth');
+$app->get('/yzh/{uid}/h5/component/card', 'YzhController@componentCard');
+$app->get('/yzh/{uid}/h5/component/invest', 'YzhController@componentInvest');
 
 // API 方式
 
 $app->post('/yzh/api/real-name-request', 'YzhController@apiRealNameRequest');
 $app->post('/yzh/api/real-name-confirm', 'YzhController@apiRealNameConfirm');
-
 $app->post('/yzh/api/bind-card-request', 'YzhController@apiBindCardRequest');
 $app->post('/yzh/api/bind-card-confirm', 'YzhController@apiBindCardConfirm');
 
@@ -53,3 +48,8 @@ $app->post('/yzh/api/bind-card-confirm', 'YzhController@apiBindCardConfirm');
 $app->get('/yzh/notice/real-name', 'YzhController@noticeRealName');
 $app->get('/yzh/notice/bankcard', 'YzhController@noticeBankcard');
 $app->get('/yzh/notice/investment', 'YzhController@noticeInvestment');
+
+
+
+
+

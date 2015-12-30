@@ -23,6 +23,9 @@ class FaultCode
     const MOBILE_ILLEGAL = '102';
     const PASSWORD_NOT_MATCH = '103';
 
+    const YZH_RESP_EMPTY = '200';
+    const YZH_RESP_ERR = '201';
+
 
     static public function getMessage($code)
     {
@@ -34,7 +37,10 @@ class FaultCode
             self::USER_EXIST => '该用户已经存在',
             self::USER_NOT_EXIST => '该用户不存在',
             self::MOBILE_ILLEGAL => '手机号格式不正确',
-            self::PASSWORD_NOT_MATCH=> '您的密码不正确',
+            self::PASSWORD_NOT_MATCH => '您的密码不正确',
+
+            self::YZH_RESP_EMPTY => '请求云账户无响应',
+            self::YZH_RESP_ERR => '云账户返回失败结果',
         ];
 
         Log::info('config', $config);

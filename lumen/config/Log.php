@@ -28,5 +28,10 @@ return [
         'path' => $logDir . 'job.log',
     ],
 
+    'auth' => [
+        'handle' => 'file',
+        'path' => $logDir . 'auth.log',
+    ],
+
 ];
 
