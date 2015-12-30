@@ -23,6 +23,18 @@ class UserController
      * 注册
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @api {post} /user/register 注册
+     * @apiName PostRegister
+     * @apiGroup User
+     *
+     * @apiParam {String} mobile 手机号
+     * @apiParam {String} password 登录密码
+     *
+     * @apiSuccessExample Success-Response:
+     *     {
+     *         ok: true
+     *     }
      */
     public function register(Request $request)
     {
@@ -61,6 +73,18 @@ class UserController
      * 登录
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @api {post} /user/login 登录
+     * @apiName PostLogin
+     * @apiGroup User
+     *
+     * @apiParam {String} mobile 手机号
+     * @apiParam {String} password 登录密码
+     *
+     * @apiSuccessExample Success-Response:
+     *     {
+     *         ok: true
+     *     }
      */
     public function login(Request $request)
     {
