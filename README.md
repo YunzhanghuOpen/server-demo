@@ -6,9 +6,9 @@
 
 本项目为云账户产品下虚拟商户 Server，模拟并支持云账户接入。
 
-## 功能
+[全部接口](yunzhanghu.com)
 
-[接口文档](yunzhanghu.com)
+## 功能
 
 ### App 本身
 * 注册
