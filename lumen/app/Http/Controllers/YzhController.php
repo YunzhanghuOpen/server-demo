@@ -72,6 +72,21 @@ class YzhController
 
     // fixed entry
 
+    /**
+     * @param $uid
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @api {get} /yzh/{uid}/h5/main H5 -- 云账户固定入口
+     * @apiName GetH5Main
+     * @apiGroup YZH
+     *
+     * @apiParam {String} uid 用户编号
+     *
+     * @apiSuccessExample Success-Response:
+     *     {
+     *         url: https://trial.yunzhanghu.com/autoLogin?partner=123456&mobile=18612341234&timestamp=1451495534&user_id=1&sign=5f1dc15d13779129f4a89a1e43f43e228a5f4d30295f8d4d3dac3cbe4461e1b6
+     *     }
+     */
     public function h5Main($uid)
     {
         // grab
@@ -89,6 +104,21 @@ class YzhController
 
     // component
 
+    /**
+     * @param $uid
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @api {get} /yzh/{uid}/h5/component/auth H5 -- 组件:实名认证
+     * @apiName GetH5Auth
+     * @apiGroup YZH
+     *
+     * @apiParam {String} uid 用户编号
+     *
+     * @apiSuccessExample Success-Response:
+     *     {
+     *         url: https://trial.yunzhanghu.com/autoLogin?partner=123456&mobile=18612341234&timestamp=1451495691&user_id=1&sign=fd63ca45a06676f92326106413f830c9dc36c6ce94b410593a2bec51cbab31fd&component=auth
+     *     }
+     */
     public function componentAuth($uid)
     {
         // grab
@@ -105,6 +135,21 @@ class YzhController
         ]);
     }
 
+    /**
+     * @param $uid
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @api {get} /yzh/{uid}/h5/component/card H5 -- 组件:绑定安全卡
+     * @apiName GetH5Card
+     * @apiGroup YZH
+     *
+     * @apiParam {String} uid 用户编号
+     *
+     * @apiSuccessExample Success-Response:
+     *     {
+     *         url: https://trial.yunzhanghu.com/autoLogin?partner=123456&mobile=18612341234&timestamp=1451495691&user_id=1&sign=fd63ca45a06676f92326106413f830c9dc36c6ce94b410593a2bec51cbab31fd&component=card
+     *     }
+     */
     public function componentCard($uid)
     {
         // grab
@@ -121,6 +166,21 @@ class YzhController
         ]);
     }
 
+    /**
+     * @param $uid
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @api {get} /yzh/{uid}/h5/component/card H5 -- 组件:投资
+     * @apiName GetH5Invest
+     * @apiGroup YZH
+     *
+     * @apiParam {String} uid 用户编号
+     *
+     * @apiSuccessExample Success-Response:
+     *     {
+     *         url: https://trial.yunzhanghu.com/autoLogin?partner=123456&mobile=18612341234&timestamp=1451495691&user_id=1&sign=fd63ca45a06676f92326106413f830c9dc36c6ce94b410593a2bec51cbab31fd&component=invest
+     *     }
+     */
     public function componentInvest($uid)
     {
         // grab
@@ -139,6 +199,23 @@ class YzhController
 
     // API 方式
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @api {get} /yzh/api/real-name-request API -- 实名认证请求
+     * @apiName GetAPIRealNameRequest
+     * @apiGroup YZH
+     *
+     * @apiParam {String} uid 用户编号
+     * @apiParam {String} RealName 真实姓名
+     * @apiParam {String} IDCard 身份证号
+     *
+     * @apiSuccessExample Success-Response:
+     *     {
+     *         Ref: 151120185800437765
+     *     }
+     */
     public function apiRealNameRequest(Request $request)
     {
         $input = $request->all();
@@ -174,6 +251,29 @@ class YzhController
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @api {get} /yzh/api/real-name-request API -- 实名认证确认
+     * @apiName GetAPIRealNameConfirm
+     * @apiGroup YZH
+     *
+     * @apiParam {String} uid 用户编号
+     * @apiParam {String} RealName 真实姓名
+     * @apiParam {String} IDCard 身份证号
+     * @apiParam {String} Captcha 验证码
+     * @apiParam {String} Ref 流水号
+     *
+     * @apiSuccessExample Success-Response:
+     *     {
+     *         Realname: 张三
+     *         IDCard: 360222195106025328
+     *         Mobile: 18612341234
+     *         Gender: 女
+     *         IsNew: 1
+     *     }
+     */
     public function apiRealNameConfirm(Request $request)
     {
         $input = $request->all();
@@ -212,6 +312,26 @@ class YzhController
         return $this->postYzhAPI($queryData);
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @api {get} /yzh/api/bind-card-request API -- 绑定银行卡请求
+     * @apiName GetAPIBindCardRequest
+     * @apiGroup YZH
+     *
+     * @apiParam {String} uid 用户编号
+     * @apiParam {String} RealName 真实姓名
+     * @apiParam {String} IDCard 身份证号
+     * @apiParam {String} BankMobile 开户手机号
+     * @apiParam {String} CardNo 借记卡号
+     * @apiParam {String} SubBankNo 联行号
+     *
+     * @apiSuccessExample Success-Response:
+     *     {
+     *         Ref: 151120185800437765
+     *     }
+     */
     public function apiBindCardRequest(Request $request)
     {
         $input = $request->all();
@@ -252,6 +372,27 @@ class YzhController
         return $this->postYzhAPI($queryData);
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @api {get} /yzh/api/bind-card-confirm API -- 绑定银行卡确认
+     * @apiName GetAPIBindCardConfirm
+     * @apiGroup YZH
+     *
+     * @apiParam {String} uid 用户编号
+     * @apiParam {String} RealName 真实姓名
+     * @apiParam {String} IDCard 身份证号
+     * @apiParam {String} BankMobile 开户手机号
+     * @apiParam {String} CardNo 银行卡号
+     * @apiParam {String} SubBankNo 联行号
+     * @apiParam {String} Captcha 验证码
+     * @apiParam {String} Ref 流水号
+     *
+     * @apiSuccessExample Success-Response:
+     *     {
+     *     }
+     */
     public function apiBindCardConfirm(Request $request)
     {
         $input = $request->all();
