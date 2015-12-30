@@ -38,6 +38,9 @@ class UserController
      */
     public function register(Request $request)
     {
+        // 拒绝注册, 仅限登录
+        return Response::error(FaultCode::RRJ);
+
         // input
         $input = $request->all();
 
