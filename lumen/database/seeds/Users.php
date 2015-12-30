@@ -12,11 +12,13 @@ class Users extends Seeder
      */
     public function run()
     {
+        $salt = \App\Helpers\CommonHelper::getSalt();
+        $passowrd = \App\Helpers\CommonHelper::makePassword('123456', $salt);
 
         DB::table('users')->insert([
             'mobile' => '18612341234',
-            'password' => bcrypt('secret'),
-            'salt' => bcrypt('salt'),
+            'password' => $passowrd,
+            'salt' => $salt,
             'created_at' => Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon::now()->toDateTimeString(),
         ]);
