@@ -227,4 +227,28 @@ class Logger
         return static::_write('job', 'error', $message, $context);
     }
 
+    /**
+     * Authorization 操作的正常信息
+     *
+     * @param $message
+     * @param array $context
+     * @return mixed
+     */
+    public static function AuthorizationInfo($message, $context = [])
+    {
+        return static::_write('auth', 'info', $message, $context);
+    }
+
+    /**
+     * Authorization 操作的出错信息
+     *
+     * @param $message
+     * @param array $context
+     * @return mixed
+     */
+    public static function AuthorizationError($message, $context = [])
+    {
+        return static::_write('auth', 'error', $message, $context);
+    }
+
 }
