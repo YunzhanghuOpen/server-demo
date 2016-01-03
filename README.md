@@ -31,4 +31,11 @@ API 方式
 1. 绑定安全卡请求（发送验证码）
 1. 绑定安全卡确认（校验验证码并绑定）
 
+## 部署
 
+```diff
+-YZH_APP_ID=null
+-YZH_APP_KEY=null
++YZH_APP_ID=xxxxxx
++YZH_APP_KEY=xxxxxxxxxxxxxxxxxxxxxx
+```
