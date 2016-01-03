@@ -33,6 +33,8 @@ API 方式
 
 ## 部署
 
+vim lumen/.env
+
 ```diff
 -YZH_APP_ID=null
 -YZH_APP_KEY=null
