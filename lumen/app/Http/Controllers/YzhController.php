@@ -76,9 +76,9 @@ class YzhController
      * @param $uid
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/{uid}/h5/main H5 -- 云账户固定入口
+     * @api {get} /yzh/{uid}/h5/main 云账户固定入口
      * @apiName GetH5Main
-     * @apiGroup YZH
+     * @apiGroup HTML5
      *
      * @apiParam {String} uid 用户编号
      *
@@ -108,9 +108,9 @@ class YzhController
      * @param $uid
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/{uid}/h5/component/auth H5 -- 组件:实名认证
+     * @api {get} /yzh/{uid}/h5/component/auth 组件:实名认证
      * @apiName GetH5Auth
-     * @apiGroup YZH
+     * @apiGroup HTML5
      *
      * @apiParam {String} uid 用户编号
      *
@@ -139,9 +139,9 @@ class YzhController
      * @param $uid
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/{uid}/h5/component/card H5 -- 组件:绑定安全卡
+     * @api {get} /yzh/{uid}/h5/component/card 组件:绑定安全卡
      * @apiName GetH5Card
-     * @apiGroup YZH
+     * @apiGroup HTML5
      *
      * @apiParam {String} uid 用户编号
      *
@@ -170,9 +170,9 @@ class YzhController
      * @param $uid
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/{uid}/h5/component/card H5 -- 组件:投资
+     * @api {get} /yzh/{uid}/h5/component/card 组件:投资
      * @apiName GetH5Invest
-     * @apiGroup YZH
+     * @apiGroup HTML5
      *
      * @apiParam {String} uid 用户编号
      *
@@ -203,9 +203,9 @@ class YzhController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/api/real-name-request API -- 实名认证请求
+     * @api {get} /yzh/api/real-name-request 实名认证请求
      * @apiName GetAPIRealNameRequest
-     * @apiGroup YZH
+     * @apiGroup API
      *
      * @apiParam {String} uid 用户编号
      * @apiParam {String} RealName 真实姓名
@@ -255,9 +255,9 @@ class YzhController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/api/real-name-request API -- 实名认证确认
+     * @api {get} /yzh/api/real-name-request 实名认证确认
      * @apiName GetAPIRealNameConfirm
-     * @apiGroup YZH
+     * @apiGroup API
      *
      * @apiParam {String} uid 用户编号
      * @apiParam {String} RealName 真实姓名
@@ -316,9 +316,9 @@ class YzhController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/api/bind-card-request API -- 绑定银行卡请求
+     * @api {get} /yzh/api/bind-card-request 绑定银行卡请求
      * @apiName GetAPIBindCardRequest
-     * @apiGroup YZH
+     * @apiGroup API
      *
      * @apiParam {String} uid 用户编号
      * @apiParam {String} RealName 真实姓名
@@ -376,9 +376,9 @@ class YzhController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/api/bind-card-confirm API -- 绑定银行卡确认
+     * @api {get} /yzh/api/bind-card-confirm 绑定银行卡确认
      * @apiName GetAPIBindCardConfirm
-     * @apiGroup YZH
+     * @apiGroup API
      *
      * @apiParam {String} uid 用户编号
      * @apiParam {String} RealName 真实姓名
@@ -443,6 +443,10 @@ class YzhController
      */
 
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function noticeRealName(Request $request)
     {
         $input = $request->all();
