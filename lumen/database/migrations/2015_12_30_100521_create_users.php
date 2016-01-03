@@ -18,6 +18,7 @@ class CreateUsers extends Migration
             $table->string('password');
             $table->string('salt');
             $table->timestamps();
+            $table->index('mobile');
         });
     }
 

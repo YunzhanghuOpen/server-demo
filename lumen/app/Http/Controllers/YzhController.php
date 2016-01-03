@@ -13,6 +13,7 @@ use App\Helpers\FaultCode;
 use App\Helpers\HMAC;
 use App\Helpers\Logger;
 use App\Helpers\Response;
+use App\Models\Notice;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -28,11 +29,13 @@ class YzhController
     const COMPONENT_INVEST = 'invest';
 
 
-    private function getPartner() {
+    private function getPartner()
+    {
         return env('YZH_APP_ID');
     }
 
-    private function getKey() {
+    private function getKey()
+    {
         return env('YZH_APP_KEY');
     }
 
@@ -43,7 +46,8 @@ class YzhController
      * @param string $component
      * @return string
      */
-    private function getH5Url($user, $component = '') {
+    private function getH5Url($user, $component = '')
+    {
         // sign
         $queryData = [
             'partner' => $this->getPartner(),
@@ -446,6 +450,18 @@ class YzhController
     /**
      * @param Request $request
      * @return Response
+     *
+     * @api {get} /yzh/notice/real-name 实名认证通知
+     * @apiName GetNoticeRealName
+     * @apiGroup Notice
+     *
+     * @apiParam {String} UserId 用户ID
+     * @apiParam {String} RealName 真实姓名
+     * @apiParam {String} IDCard 身份证号
+     * @apiParam {String} IsNew 是否是新用户
+     *
+     * @apiSuccessExample Success-Response:
+     * success
      */
     public function noticeRealName(Request $request)
     {
@@ -468,22 +484,146 @@ class YzhController
             return response('sign error');
         }
 
-        // duplicate TODO
+        // duplicate
+        $row = Notice::where('ref', $input['Ref'])->first();
+        if ($row) {
+            Logger::AuthorizationInfo('@YzhController noticeRealName, duplicate, return success');
+            return response('success');
+        }
 
-
-        // data
+        // data 记录通知数据,跟据业务再做处理
+        $notice = new Notice();
+        $notice->ref = $input['Ref'];
+        $notice->uid = $input['UserId'];
+        $notice->result = json_encode($input);
+        $notice->save();
 
         // response
+
+        Logger::AuthorizationInfo('@YzhController noticeRealName, received, return success');
+
+        return response('success');
     }
 
-    public function noticeBankcard()
+    /**
+     * @param Request $request
+     * @return Response
+     *
+     * @api {get} /yzh/notice/bankcard 绑定安全卡通知
+     * @apiName GetNoticeBankcard
+     * @apiGroup Notice
+     *
+     * @apiParam {String} UserId 用户ID
+     * @apiParam {String} CardNo 银行卡号
+     * @apiParam {String} BankBranch 支行名称
+     * @apiParam {String} BankMobile 银行卡预留手机号
+     * @apiParam {String} RealName 用户真实姓名
+     * @apiParam {String} IDCard 身份证号
+     * @apiParam {String} IsFirstCard 率先绑定的第一张安全卡
+     * @apiParam {String} Ref 消息流水号
+     *
+     * @apiSuccessExample Success-Response:
+     * success
+     */
+    public function noticeBankcard(Request $request)
     {
-        return '';
+        $input = $request->all();
+
+        Logger::AuthorizationInfo('@YzhController noticeBankcard, start', $input);
+
+        if (empty($input['sign'])) {
+
+            Logger::AuthorizationError('@YzhController noticeBankcard, no sign');
+
+            return response('no sign');
+        }
+
+        // sign
+        if (HMAC::compare($input, $this->getKey(), $input['sign'])) {
+
+            Logger::AuthorizationError('@YzhController noticeBankcard, sign error');
+
+            return response('sign error');
+        }
+
+        // duplicate
+        $row = Notice::where('ref', $input['Ref'])->first();
+        if ($row) {
+            Logger::AuthorizationInfo('@YzhController noticeBankcard, duplicate, return success');
+            return response('success');
+        }
+
+        // data 记录通知数据,跟据业务再做处理
+        $notice = new Notice();
+        $notice->ref = $input['Ref'];
+        $notice->uid = $input['UserId'];
+        $notice->result = json_encode($input);
+        $notice->save();
+
+        // response
+
+        Logger::AuthorizationInfo('@YzhController noticeBankcard, received, return success');
+
+        return response('success');
     }
 
-    public function noticeInvestment()
+    /**
+     * @param Response $request
+     * @return Response
+     *
+     * @api {get} /yzh/notice/investment 投资结果通知
+     * @apiName GetNoticeInvestment
+     * @apiGroup Notice
+     *
+     * @apiParam {String} UserId 用户ID
+     * @apiParam {String} ProductName 理财产品名称
+     * @apiParam {String} Amount 投资金额
+     * @apiParam {String} DateTime 投资时间
+     * @apiParam {String} Ref 消息流水号
+     *
+     * @apiSuccessExample Success-Response:
+     * success
+     */
+    public function noticeInvestment(Response $request)
     {
-        return '';
+        $input = $request->all();
+
+        Logger::AuthorizationInfo('@YzhController noticeInvestment, start', $input);
+
+        if (empty($input['sign'])) {
+
+            Logger::AuthorizationError('@YzhController noticeInvestment, no sign');
+
+            return response('no sign');
+        }
+
+        // sign
+        if (HMAC::compare($input, $this->getKey(), $input['sign'])) {
+
+            Logger::AuthorizationError('@YzhController noticeInvestment, sign error');
+
+            return response('sign error');
+        }
+
+        // duplicate
+        $row = Notice::where('ref', $input['Ref'])->first();
+        if ($row) {
+            Logger::AuthorizationInfo('@YzhController noticeInvestment, duplicate, return success');
+            return response('success');
+        }
+
+        // data 记录通知数据,跟据业务再做处理
+        $notice = new Notice();
+        $notice->ref = $input['Ref'];
+        $notice->uid = $input['UserId'];
+        $notice->result = json_encode($input);
+        $notice->save();
+
+        // response
+
+        Logger::AuthorizationInfo('@YzhController noticeInvestment, received, return success');
+
+        return response('success');
     }
 
     /**
@@ -492,7 +632,8 @@ class YzhController
      * @param $queryData
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    private function postYzhAPI($queryData) {
+    private function postYzhAPI($queryData)
+    {
 
         Logger::sysInfo('@YzhController postYzhAPI, begin', $queryData);
 
@@ -517,15 +658,13 @@ class YzhController
                 Logger::sysInfo('@YzhController postYzhAPI, end, successful');
 
                 return Response::result($result['data']);
-            }
-            else {
+            } else {
 
                 Logger::sysInfo('@YzhController postYzhAPI, end, error', $result);
 
                 return Response::error(FaultCode::YZH_RESP_ERR, $result);
             }
-        }
-        else {
+        } else {
 
             Logger::sysInfo('@YzhController postYzhAPI, end, error, no response content');
 

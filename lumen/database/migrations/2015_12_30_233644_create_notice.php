@@ -13,11 +13,12 @@ class CreateNotice extends Migration
     public function up()
     {
         Schema::create('notice', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('ref');
-            $table->string('result');
-            $table->string('status'); //处理状态
+            $table->increments('id')->comment('表自增ID');
+            $table->string('uid')->comment('用户ID');
+            $table->string('ref')->comment('通知消息流水号');
+            $table->string('result')->comment('通知数据');
             $table->timestamps();
+            $table->index('ref');
         });
     }
 
