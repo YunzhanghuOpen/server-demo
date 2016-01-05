@@ -477,7 +477,7 @@ class YzhController
         }
 
         // sign
-        if (HMAC::compare($input, $this->getKey(), $input['sign'])) {
+        if (!HMAC::compare($input, $this->getKey(), $input['sign'])) {
 
             Logger::AuthorizationError('@YzhController noticeRealName, sign error');
 
@@ -584,7 +584,7 @@ class YzhController
      * @apiSuccessExample Success-Response:
      * success
      */
-    public function noticeInvestment(Response $request)
+    public function noticeInvestment(Request $request)
     {
         $input = $request->all();
 
@@ -598,7 +598,7 @@ class YzhController
         }
 
         // sign
-        if (HMAC::compare($input, $this->getKey(), $input['sign'])) {
+        if (!HMAC::compare($input, $this->getKey(), $input['sign'])) {
 
             Logger::AuthorizationError('@YzhController noticeInvestment, sign error');
 
