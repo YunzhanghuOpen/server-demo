@@ -33,7 +33,7 @@ API 方式
 
 ## 部署
 
-vim lumen/.env
+`vim lumen/.env`
 
 ```diff
 -YZH_APP_ID=null
