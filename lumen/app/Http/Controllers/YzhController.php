@@ -539,7 +539,7 @@ class YzhController
         }
 
         // sign
-        if (HMAC::compare($input, $this->getKey(), $input['sign'])) {
+        if (!HMAC::compare($input, $this->getKey(), $input['sign'])) {
 
             Logger::AuthorizationError('@YzhController noticeBankcard, sign error');
 
