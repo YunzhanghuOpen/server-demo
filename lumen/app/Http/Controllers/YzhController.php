@@ -251,7 +251,7 @@ class YzhController
             'IDCard' => $input['IDCard'],
         ];
 
-        return $this->postYzhAPI($queryData);
+        return $this->postYzhAPI($queryData, '/api/real-name-request');
 
     }
 
@@ -313,7 +313,7 @@ class YzhController
             'Ref' => $input['Ref'],
         ];
 
-        return $this->postYzhAPI($queryData);
+        return $this->postYzhAPI($queryData, '/api/real-name-confirm');
     }
 
     /**
@@ -373,7 +373,7 @@ class YzhController
             'SubBankNo' => $input['SubBankNo'],
         ];
 
-        return $this->postYzhAPI($queryData);
+        return $this->postYzhAPI($queryData, '/api/bind-card-request');
     }
 
     /**
@@ -438,7 +438,7 @@ class YzhController
             'Ref' => $input['Ref'],
         ];
 
-        return $this->postYzhAPI($queryData);
+        return $this->postYzhAPI($queryData, '/api/bind-card-confirm');
     }
 
 
@@ -632,7 +632,7 @@ class YzhController
      * @param $queryData
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    private function postYzhAPI($queryData)
+    private function postYzhAPI($queryData, $pathName)
     {
 
         Logger::sysInfo('@YzhController postYzhAPI, begin', $queryData);
@@ -640,7 +640,10 @@ class YzhController
         $sign = HMAC::calculate($queryData, $this->getKey());
         $queryData['sign'] = $sign;
 
-        $url = sprintf('%s/api/real-name-request', $this->baseUrl);
+        $url = sprintf('%s%s', $this->baseUrl, $pathName);
+
+        Logger::sysInfo('@YzhController postYzhAPI, url:' . $url);
+
         $client = new Client([
             'timeout' => 10 * 60
         ]);
