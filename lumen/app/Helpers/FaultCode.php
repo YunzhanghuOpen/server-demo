@@ -17,6 +17,7 @@ class FaultCode
     const SUCCESSFUL = '0';
 
     const PARAMS_ERROR = '1';
+    const ACCESS_DENIED = '2';
 
     const USER_NOT_EXIST = '100';
     const USER_EXIST = '101';
@@ -34,6 +35,7 @@ class FaultCode
             self::SUCCESSFUL => '操作成功',
 
             self::PARAMS_ERROR => '参数错误',
+            self::ACCESS_DENIED => '禁止访问',
 
             self::USER_EXIST => '该用户已经存在',
             self::USER_NOT_EXIST => '该用户不存在',

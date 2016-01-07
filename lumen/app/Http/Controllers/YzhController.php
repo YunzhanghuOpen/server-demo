@@ -16,6 +16,7 @@ use App\Helpers\Response;
 use App\Models\Notice;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 
@@ -673,6 +674,127 @@ class YzhController
 
             return Response::error(FaultCode::YZH_RESP_EMPTY);
         }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @api {get} /yzh/account/clear 删除单个账户
+     * @apiName PostToolClear
+     * @apiGroup Tool
+     *
+     * @apiParam {String} partner 商户编号
+     * @apiParam {String} user_id 用户ID
+     *
+     * @apiSuccessExample Success-Response:
+     * HTTP/1.1 200 OK
+     * {
+     *   "ok": true
+     * }
+     *
+     */
+    public function clear(Request $request) {
+
+        $input = $request->all();
+
+        Logger::sysInfo('@YzhController clear, begin, clear', $input);
+
+        $validator = Validator::make($input, [
+            'partner' => 'required',
+            'user_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $errors = $validator->errors()->toArray();
+            return Response::error(FaultCode::PARAMS_ERROR, $errors);
+        }
+
+        if (!in_array($input['partner'], config('Flush'))) {
+            return Response::error(FaultCode::ACCESS_DENIED);
+        }
+
+        $results = DB::connection('trial')->select('select I_USER_ID from dealer_user_relation where CH_DEALER_USER_ID = :id and CH_DEALER_CODE = :code',
+            [
+                'id' => $input['user_id'],
+                'code' => $input['partner']
+            ]
+        );
+
+        if (empty($results)) {
+            return Response::error(FaultCode::USER_NOT_EXIST);
+        }
+
+
+        $log = [];
+        foreach($results as $row) {
+            $id = $row->I_USER_ID;
+            $log[] = DB::connection('trial')->delete('delete from users where I_USER_ID = :id', ['id' => $id]);
+            $log[] = DB::connection('trial')->delete('delete from user_account where I_USER_ID = :id', ['id' => $id]);
+            $log[] = DB::connection('trial')->delete('delete from user_bankcards where I_USER_ID = :id', ['id' => $id]);
+            $log[] = DB::connection('trial')->delete('delete from dealer_user_relation where I_USER_ID = :id', ['id' => $id]);
+        }
+
+        Logger::sysInfo('@YzhController clear, end, log', $log);
+
+        return Response::result(['ok' => true]);
+
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @api {get} /yzh/account/flush 删除所有账户
+     * @apiName PostToolFlush
+     * @apiGroup Tool
+     *
+     * @apiParam {String} partner 商户编号
+     *
+     * @apiSuccessExample Success-Response:
+     * HTTP/1.1 200 OK
+     * {
+     *   "ok": true
+     * }
+     *
+     */
+    public function flush(Request $request) {
+
+        $input = $request->all();
+
+        Logger::sysInfo('@YzhController flush, begin, clear', $input);
+
+        $validator = Validator::make($input, [
+            'partner' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $errors = $validator->errors()->toArray();
+            return Response::error(FaultCode::PARAMS_ERROR, $errors);
+        }
+
+        if (!in_array($input['partner'], config('Flush'))) {
+            return Response::error(FaultCode::ACCESS_DENIED);
+        }
+
+        $results = DB::connection('trial')->select('select I_USER_ID from dealer_user_relation where CH_DEALER_CODE = :code', ['code' => $input['partner']]);
+
+        if (empty($results)) {
+            return Response::result(['ok' => true]);
+        }
+
+        $log = [];
+        foreach($results as $row) {
+            $id = $row->I_USER_ID;
+            $log[] = DB::connection('trial')->delete('delete from users where I_USER_ID = :id', ['id' => $id]);
+            $log[] = DB::connection('trial')->delete('delete from user_account where I_USER_ID = :id', ['id' => $id]);
+            $log[] = DB::connection('trial')->delete('delete from user_bankcards where I_USER_ID = :id', ['id' => $id]);
+            $log[] = DB::connection('trial')->delete('delete from dealer_user_relation where I_USER_ID = :id', ['id' => $id]);
+        }
+
+        Logger::sysInfo('@YzhController flush, end, log', $log);
+
+        return Response::result(['ok' => true]);
+
+
     }
 
 

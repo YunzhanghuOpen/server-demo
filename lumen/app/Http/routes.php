@@ -49,6 +49,12 @@ $app->get('/yzh/notice/real-name', 'YzhController@noticeRealName');
 $app->get('/yzh/notice/bankcard', 'YzhController@noticeBankcard');
 $app->get('/yzh/notice/investment', 'YzhController@noticeInvestment');
 
+/**
+ * 清楚云账户账号
+ */
+$app->post('/yzh/account/clear', 'YzhController@clear');
+$app->post('/yzh/account/flush', 'YzhController@flush');
+
 
 
 
