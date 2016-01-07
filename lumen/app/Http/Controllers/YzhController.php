@@ -680,7 +680,7 @@ class YzhController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/account/clear 删除单个账户
+     * @api {post} /yzh/account/clear 删除单个账户
      * @apiName PostToolClear
      * @apiGroup Tool
      *
@@ -744,7 +744,7 @@ class YzhController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/account/flush 删除所有账户
+     * @api {post} /yzh/account/flush 删除所有账户
      * @apiName PostToolFlush
      * @apiGroup Tool
      *
