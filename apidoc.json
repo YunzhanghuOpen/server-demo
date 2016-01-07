@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "接口文档",
   "title": "server-demo",
-  "url" : "http://localhost",
+  "url" : "http://v-server.yunzhanghu.com",
   "order": [
     "user"
   ],
