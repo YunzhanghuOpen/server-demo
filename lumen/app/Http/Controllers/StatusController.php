@@ -8,15 +8,9 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Helpers\CommonHelper;
-use App\Helpers\FaultCode;
-use App\Helpers\Response;
 use App\Models\Notice;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
+use Illuminate\Pagination\Paginator;
 
 class StatusController
 {
