@@ -56,6 +56,10 @@ $app->post('/yzh/account/clear', 'YzhController@clear');
 $app->post('/yzh/account/flush', 'YzhController@flush');
 
 
+/**
+ * server 运行状态查询
+ */
+$app->get('/status', 'StatusController@index');
 
 
 
