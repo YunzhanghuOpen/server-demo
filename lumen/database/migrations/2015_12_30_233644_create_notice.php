@@ -16,7 +16,7 @@ class CreateNotice extends Migration
             $table->increments('id')->comment('表自增ID');
             $table->string('uid')->comment('用户ID');
             $table->string('ref')->comment('通知消息流水号');
-            $table->string('result')->comment('通知数据');
+            $table->text('result')->comment('通知数据');
             $table->timestamps();
             $table->index('ref');
         });

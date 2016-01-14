@@ -20,19 +20,21 @@
 
 <table>
     <tr>
-        <th>id</th>
-        <th>uid</th>
-        <th>ref</th>
-        <th>result</th>
-        <th>created_at</th>
-        <th>updated_at</th>
+        <th>索引</th>
+        <th>用户ID</th>
+        <th>流水号</th>
+        <th>通知类型</th>
+        <th>通知内容</th>
+        <th>创建时间</th>
+        <th>修改时间</th>
     </tr>
     @foreach ($notice as $row)
         <tr>
             <td>{{ $row['id'] }}</td>
             <td>{{ $row['uid'] }}</td>
             <td>{{ $row['ref'] }}</td>
-            <td>{{ $row['result'] }}</td>
+            <td>{{ $row['type'] }}</td>
+            <td>{{ var_dump(json_decode($row['result'], true), true) }}</td>
             <td>{{ $row['created_at'] }}</td>
             <td>{{ $row['updated_at'] }}</td>
         </tr>

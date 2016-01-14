@@ -495,6 +495,7 @@ class YzhController
         // data 记录通知数据,跟据业务再做处理
         $notice = new Notice();
         $notice->ref = $input['Ref'];
+        $notice->type = Notice::T_REAL_NAME;
         $notice->uid = $input['UserId'];
         $notice->result = json_encode($input);
         $notice->save();
@@ -557,6 +558,7 @@ class YzhController
         // data 记录通知数据,跟据业务再做处理
         $notice = new Notice();
         $notice->ref = $input['Ref'];
+        $notice->type = Notice::T_BANKCARD;
         $notice->uid = $input['UserId'];
         $notice->result = json_encode($input);
         $notice->save();
@@ -569,7 +571,7 @@ class YzhController
     }
 
     /**
-     * @param Response $request
+     * @param Request $request
      * @return Response
      *
      * @api {get} /yzh/notice/investment 投资结果通知
@@ -616,6 +618,7 @@ class YzhController
         // data 记录通知数据,跟据业务再做处理
         $notice = new Notice();
         $notice->ref = $input['Ref'];
+        $notice->type = Notice::T_INVEST;
         $notice->uid = $input['UserId'];
         $notice->result = json_encode($input);
         $notice->save();
