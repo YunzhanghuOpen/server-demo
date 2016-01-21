@@ -683,6 +683,67 @@ class YzhController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
+     * @api {post} /yzh/account/remove 解除与商户绑定关系
+     * @apiName PostToolRemove
+     * @apiGroup Tool
+     *
+     * @apiParam {String} partner 商户编号
+     * @apiParam {String} user_id 用户ID
+     *
+     * @apiSuccessExample Success-Response:
+     * HTTP/1.1 200 OK
+     * {
+     *   "ok": true
+     * }
+     *
+     */
+    public function remove(Request $request) {
+
+        $input = $request->all();
+
+        Logger::sysInfo('@YzhController remove, begin, clear', $input);
+
+        $validator = Validator::make($input, [
+            'partner' => 'required',
+            'user_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $errors = $validator->errors()->toArray();
+            return Response::error(FaultCode::PARAMS_ERROR, $errors);
+        }
+
+        if (!in_array($input['partner'], config('Flush'))) {
+            return Response::error(FaultCode::ACCESS_DENIED);
+        }
+
+        $results = DB::connection('trial')->select('select I_USER_ID from dealer_user_relation where CH_DEALER_USER_ID = :id and CH_DEALER_CODE = :code',
+            [
+                'id' => $input['user_id'],
+                'code' => $input['partner']
+            ]
+        );
+
+        if (empty($results)) {
+            return Response::error(FaultCode::USER_NOT_EXIST);
+        }
+
+
+        $log = [];
+        foreach($results as $row) {
+            $id = $row->I_USER_ID;
+            $log[] = DB::connection('trial')->delete('delete from dealer_user_relation where I_USER_ID = :id', ['id' => $id]);
+        }
+
+        Logger::sysInfo('@YzhController remove, end, log', $log);
+
+        return Response::result(['ok' => true]);
+
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @api {post} /yzh/account/clear 删除单个账户
      * @apiName PostToolClear
      * @apiGroup Tool

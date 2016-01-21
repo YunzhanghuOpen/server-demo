@@ -52,6 +52,7 @@ $app->get('/yzh/notice/investment', 'YzhController@noticeInvestment');
 /**
  * 清除云账户账号
  */
+$app->post('/yzh/account/remove', 'YzhController@remove');
 $app->post('/yzh/account/clear', 'YzhController@clear');
 $app->post('/yzh/account/flush', 'YzhController@flush');
 
