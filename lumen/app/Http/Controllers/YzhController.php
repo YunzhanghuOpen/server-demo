@@ -744,7 +744,7 @@ class YzhController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {post} /yzh/account/clear 删除单个账户
+     * @api {post} /yzh/account/clear 彻底删除该商户下该用户
      * @apiName PostToolClear
      * @apiGroup Tool
      *
@@ -808,7 +808,7 @@ class YzhController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {post} /yzh/account/flush 删除所有账户
+     * @api {post} /yzh/account/flush 彻底删除该商户下所有用户
      * @apiName PostToolFlush
      * @apiGroup Tool
      *
