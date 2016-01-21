@@ -208,7 +208,7 @@ class YzhController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/api/real-name-request 实名认证请求
+     * @api {post} /yzh/api/real-name-request 实名认证请求
      * @apiName GetAPIRealNameRequest
      * @apiGroup API
      *
@@ -260,7 +260,7 @@ class YzhController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/api/real-name-request 实名认证确认
+     * @api {post} /yzh/api/real-name-confirm 实名认证确认
      * @apiName GetAPIRealNameConfirm
      * @apiGroup API
      *
@@ -321,7 +321,7 @@ class YzhController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/api/bind-card-request 绑定银行卡请求
+     * @api {post} /yzh/api/bind-card-request 绑定银行卡请求
      * @apiName GetAPIBindCardRequest
      * @apiGroup API
      *
@@ -381,7 +381,7 @@ class YzhController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @api {get} /yzh/api/bind-card-confirm 绑定银行卡确认
+     * @api {post} /yzh/api/bind-card-confirm 绑定银行卡确认
      * @apiName GetAPIBindCardConfirm
      * @apiGroup API
      *
