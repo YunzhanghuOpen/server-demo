@@ -33,7 +33,7 @@ class UserController
      *
      * @apiSuccessExample Success-Response:
      *     {
-     *         ok: true
+     *         uid: 1
      *     }
      */
     public function register(Request $request)
@@ -68,7 +68,7 @@ class UserController
         $user->save();
 
         return Response::result([
-            'ok' => true
+            'uid' => $user->id
         ]);
     }
 
@@ -86,7 +86,7 @@ class UserController
      *
      * @apiSuccessExample Success-Response:
      *     {
-     *         ok: true
+     *         uid: 1
      *     }
      */
     public function login(Request $request)
@@ -116,7 +116,7 @@ class UserController
         }
 
         return Response::result([
-            'ok' => true
+            'uid' => $user->id
         ]);
     }
 
