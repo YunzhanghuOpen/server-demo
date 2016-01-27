@@ -102,5 +102,6 @@ $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
 
 $app->configure('Log');
 $app->configure('Flush');
+$app->configure('yzh');
 
 return $app;
