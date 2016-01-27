@@ -23,7 +23,9 @@ use GuzzleHttp\Client;
 class YzhController
 {
 
-    public $baseUrl = 'https://trial.yunzhanghu.com';
+    public $baseUrl = '';
+    public $appId = '';
+    public $appKey = '';
 
     const COMPONENT_AUTH = 'auth';
     const COMPONENT_CARD = 'card';
@@ -32,12 +34,19 @@ class YzhController
 
     private function getPartner()
     {
-        return env('YZH_APP_ID');
+        $this->appId;
     }
 
     private function getKey()
     {
-        return env('YZH_APP_KEY');
+        $this->appKey;
+    }
+
+    public function __construct()
+    {
+        $this->baseUrl = config('yzh.baseUrl');
+        $this->appId = config('yzh.appId');
+        $this->appKey = config('yzh.appKey');
     }
 
     /**
