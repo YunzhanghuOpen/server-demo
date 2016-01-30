@@ -34,12 +34,12 @@ class YzhController
 
     private function getPartner()
     {
-        $this->appId;
+        return $this->appId;
     }
 
     private function getKey()
     {
-        $this->appKey;
+        return $this->appKey;
     }
 
     public function __construct()
