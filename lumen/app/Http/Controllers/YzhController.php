@@ -63,7 +63,7 @@ class YzhController
             'partner' => $this->getPartner(),
             'mobile' => $user->mobile,
             'timestamp' => time(),
-            'user_id' => $user->id,
+            'user_id' => $user->uid,
             'sign' => '',
         ];
         // 是否使用组件
@@ -254,7 +254,7 @@ class YzhController
             'partner' => $this->getPartner(),
             'mobile' => $user->mobile,
             'timestamp' => time(),
-            'user_id' => $user->id,
+            'user_id' => $user->uid,
             'sign' => '',
 
             'RealName' => $input['RealName'],
@@ -314,7 +314,7 @@ class YzhController
             'partner' => $this->getPartner(),
             'mobile' => $user->mobile,
             'timestamp' => time(),
-            'user_id' => $user->id,
+            'user_id' => $user->uid,
             'sign' => '',
 
             'RealName' => $input['RealName'],
@@ -373,7 +373,7 @@ class YzhController
             'partner' => $this->getPartner(),
             'mobile' => $user->mobile,
             'timestamp' => time(),
-            'user_id' => $user->id,
+            'user_id' => $user->uid,
             'sign' => '',
 
             'RealName' => $input['RealName'],
@@ -436,7 +436,7 @@ class YzhController
             'partner' => $this->getPartner(),
             'mobile' => $user->mobile,
             'timestamp' => time(),
-            'user_id' => $user->id,
+            'user_id' => $user->uid,
             'sign' => '',
 
             'RealName' => $input['RealName'],

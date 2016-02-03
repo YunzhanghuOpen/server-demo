@@ -62,13 +62,14 @@ class UserController
 
         // new
         $user = new User();
+        $user->uid = uniqid() . mt_rand(1000, 2000);
         $user->mobile = $input['mobile'];
         $user->salt = CommonHelper::getSalt();
         $user->password = CommonHelper::makePassword($input['password'], $user->salt);
         $user->save();
 
         return Response::result([
-            'uid' => $user->id
+            'uid' => $user->uid
         ]);
     }
 
@@ -116,7 +117,7 @@ class UserController
         }
 
         return Response::result([
-            'uid' => $user->id
+            'uid' => $user->uid
         ]);
     }
 

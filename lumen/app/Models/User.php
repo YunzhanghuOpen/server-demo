@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class User
  * @package App\Models
  * @property int id
+ * @property string uid
  * @property string mobile
  * @property string password
  * @property string salt
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     protected $table = 'users';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'uid';
 
     protected $fillable = [];
     protected $hidden = [];

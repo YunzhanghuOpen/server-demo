@@ -16,6 +16,7 @@ class Users extends Seeder
         $passowrd = \App\Helpers\CommonHelper::makePassword('123456', $salt);
 
         DB::table('users')->insert([
+            'uid' => uniqid() . mt_rand(1000, 2000),
             'mobile' => '18612341234',
             'password' => $passowrd,
             'salt' => $salt,
