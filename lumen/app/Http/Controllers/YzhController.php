@@ -116,6 +116,16 @@ class YzhController
         ]);
     }
 
+    public function h5MainGuest()
+    {
+        // 创建一个游客用户
+        $user = new User();
+        $user->uid = '';
+        $user->mobile = '';
+        $url = $this->getH5Url($user);
+        return redirect($url);
+    }
+
     // component
 
     /**

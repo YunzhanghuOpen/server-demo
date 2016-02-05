@@ -30,6 +30,7 @@ $app->post('/user/login', 'UserController@login');
 // HTML5 方式
 
 $app->get('/yzh/{uid}/h5/main', 'YzhController@h5Main');
+$app->get('/yzh/h5/main/guest', 'YzhController@h5MainGuest');
 $app->get('/yzh/{uid}/h5/component/auth', 'YzhController@componentAuth');
 $app->get('/yzh/{uid}/h5/component/card', 'YzhController@componentCard');
 $app->get('/yzh/{uid}/h5/component/invest', 'YzhController@componentInvest');
