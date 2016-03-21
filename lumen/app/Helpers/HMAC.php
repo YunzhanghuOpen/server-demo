@@ -30,7 +30,7 @@ class HMAC
 
         Logger::authorizationInfo('@HMAC calculate original string = ' . $signPars);
 
-        $hash = strtolower(hash('sha256', $signPars));
+        $hash = hash_hmac('sha256', $signPars, $key);
 
         Logger::authorizationInfo('@HMAC calculate end, hash = ' . $hash);
 
